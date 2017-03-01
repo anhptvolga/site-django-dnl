@@ -8,7 +8,7 @@ class Slide(models.Model):
     """
         Carousel in home page
     """
-    img = models.ImageField(upload_to='statics/', height_field=100, width_field=100, max_length=1000)
+    img = models.ImageField(upload_to='statics/carousel', height_field=100, width_field=100, max_length=1000)
     short_descr = models.CharField(max_length=30)
     long_descr = models.CharField(max_length=120)
 
@@ -26,9 +26,9 @@ class News(models.Model):
     """
         News for site
     """
-    img = models.ImageField(upload_to='statics/', height_field=100, width_field=100, max_length=1000)
+    img = models.ImageField(upload_to='statics/news', height_field=100, width_field=100, max_length=1000)
     title = models.CharField(max_length=50)
-    data = models.DateField()
+    date = models.DateField()
     detail = models.TextField()
 
 
@@ -36,13 +36,13 @@ class Composition(models.Model):
     """
         Composition of DNL
     """
-    img = models.ImageField(upload_to='statics/', height_field=100, width_field=100, max_length=1000)
+    img = models.ImageField(upload_to='statics/comps', height_field=100, width_field=100, max_length=1000)
     name = models.CharField(max_length=100)
     price = models.PositiveSmallIntegerField(default=0)
-    data = models.DateField()
+    date = models.DateField()
     short_descr = models.CharField(max_length=50)
     detail = models.CharField(max_length=120)
-    file = models.FileField(upload_to='statics/', max_length=10000)
+    file = models.FileField(upload_to='statics/comps', max_length=10000)
 
 
 class Contact(models.Model):
