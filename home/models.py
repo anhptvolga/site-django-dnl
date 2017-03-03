@@ -16,10 +16,10 @@ class Slide(models.Model):
     """
         Carousel in home page
     """
-    img = models.ImageField(upload_to='statics/carousel')
+    img = models.ImageField(upload_to='static/carousel')
     short_descr = models.CharField(max_length=30)
     long_descr = models.CharField(max_length=120)
-    carousel = models.ForeignKey(HomePage, on_delete=models.CASCADE, default=None)
+    home_page = models.ForeignKey(HomePage, on_delete=models.CASCADE, default=None)
 
 
 class News(models.Model):
