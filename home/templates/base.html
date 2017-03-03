@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>{% block title %}Dang Ngoc Long Guitar{% endblock %}</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="{% static "hmstyle.css" %}">
+</head>
+<body {% block bodyattrs %}{% endblock %}>
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavbar"></button>
+      <a class="navbar-brand" href="#pagednl">LogoDNL</a>
+    </div>
+    <div class="collapse navbar-collapse" id="topNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li {%  if home_active %}class="active"{% endif %}><a href="{% url 'home' %}">HOME</a></li>
+        <li {%  if news_active %}class="active"{% endif %}><a href="{% url 'news' %}">NEWS</a></li>
+        <li {%  if comps_active %}class="active"{% endif %}><a href="{% url 'comps' %}">COMPOSITIONS</a></li>
+        <li {%  if contact_active %}class="active"{% endif %}><a href="{% url 'contact' %}">CONTACT</a></li>
+        <li>
+            <form action="" class="search-form">
+                <div class="form-group has-feedback">
+                    <input type="text" class="form-control" name="search" id="search" placeholder="search">
+                    <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                </div>
+            </form>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+{% block bodycontent %}{% endblock %}
+</body>
