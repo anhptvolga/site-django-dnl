@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Contact, HomePage, Slide, News
+from .models import Contact, HomePage, Slide, News, Composition
 # Create your views here.
 
 
@@ -31,8 +31,10 @@ def compositions(request):
     """
         View of compositions page
     """
+    comps = Composition.objects.all()[:3]
     return render(request, "comps.html", {
         'comps_active': True,
+        'comps': comps,
     })
 
 

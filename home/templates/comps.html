@@ -1,20 +1,24 @@
 {% extends "base.html" %}
-{% block bodyattrs %}id="compositions"{% endblock %}
+{% block bodyattrs %}id="pagednl" data-spy="scroll" data-target=".navbar" data-offset="50" class="bg-1"{% endblock %}
 {% block bodycontent %}
 <div class="container">
     <h3 class="text-center">COMPOSITIONS</h3>
     <p class="text-center">"Using new, self-developed technics of playing, he realizes in his compositions in a virtuoso way the traditional pentatonic sounds of his homeland's folk music with the guitar."<br>(Christoph Herrmann, TIP - Berlin Magazin)</p>
     <div class="row text-center">
+      {% if comps.count == 1 %}<div class="col-sm-4"></div>{% endif %}
+      {% if comps.count == 2 %}<div class="col-sm-2"></div>{% endif %}
       {% for comp in comps %}
        <div class="col-sm-4">
         <div class="thumbnail">
-          <img src="{{ comp.img.url }}" width="500" height="500">
+          <img src="{{ comp.img.url }}" style="height: 300px">
           <p>{{ comp.name }}</p>
-          <p><span class="glyphicon glyphicon-usd" style="color: #787c7f"></span>100</p>
+          <p><span class="glyphicon glyphicon-usd" style="color: #787c7f"></span>{{ comp.price }}</p>
           <button class="btn" data-toggle="modal" data-target="#buydlg">Buy</button>
         </div>
       </div>
       {% endfor %}
+      {% if comps.count == 1 %}<div class="col-sm-4"></div>{% endif %}
+      {% if comps.count == 2 %}<div class="col-sm-2"></div>{% endif %}
     </div>
 </div>
 {% endblock %}
