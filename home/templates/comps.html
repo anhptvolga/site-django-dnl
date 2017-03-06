@@ -1,3 +1,20 @@
 {% extends "base.html" %}
-{% block bodyattrs %}{% endblock %}
-{% block bodycontent %}{% endblock %}
+{% block bodyattrs %}id="compositions"{% endblock %}
+{% block bodycontent %}
+<div class="container">
+    <h3 class="text-center">COMPOSITIONS</h3>
+    <p class="text-center">"Using new, self-developed technics of playing, he realizes in his compositions in a virtuoso way the traditional pentatonic sounds of his homeland's folk music with the guitar."<br>(Christoph Herrmann, TIP - Berlin Magazin)</p>
+    <div class="row text-center">
+      {% for comp in comps %}
+       <div class="col-sm-4">
+        <div class="thumbnail">
+          <img src="{{ comp.img.url }}" width="500" height="500">
+          <p>{{ comp.name }}</p>
+          <p><span class="glyphicon glyphicon-usd" style="color: #787c7f"></span>100</p>
+          <button class="btn" data-toggle="modal" data-target="#buydlg">Buy</button>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+</div>
+{% endblock %}
