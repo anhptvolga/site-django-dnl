@@ -4,29 +4,17 @@
 {% block bodycontent %}
 <div id="news" class="container">
   <h1>News</h1>
+  {% for nws in news %}
   <div class="media">
     <div class="media-left media-middle">
-      <a href="">
-        <img class="media-object" src="{% static "imgs/news1.jpg" %}" alt="new album" width="300" height="300">
-      </a>
+      <img class="media-object" src="{{ nws.img.url }}" alt="new album" width="300" height="300">
     </div>
   <div class="media-body">
-    <h2>Guitar star</h2><br>
-    <p>16 May 2016</p>
-    <p>On Saturday the 21st of May at a Central London location, Milos will be hosting a question and answer session, along with Jon Gomm who will be performing some live tracks for Sky Arts Guitar Star. Request tickets by emailing guitar@somethinelse.com with Milos / Jon Gomm Audience Tickets in the subject line!</p>
+    <h2>{{ nws.title }}</h2><br>
+    <p>{{ nws.date|date:"d M Y"  }}</p>
+    <p>{{ nws.detail }}</p>
   </div>
   </div>
-  <div class="media">
-    <div class="media-left media-middle">
-      <a href="">
-        <img class="media-object" src="{% static "imgs/news2.jpg" %}" alt="new album" width="300" height="300">
-      </a>
-    </div>
-  <div class="media-body">
-    <h2>Talkshow</h2><br>
-    <p>16 May 2016</p>
-    <p>Some default panel content here. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum nulla sed consectetur. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-  </div>
-  </div>
+  {% endfor %}
 </div>
 {% endblock %}

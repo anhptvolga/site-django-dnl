@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Contact, HomePage, Slide
+from .models import Contact, HomePage, Slide, News
 # Create your views here.
 
 
@@ -20,8 +20,10 @@ def news(request):
     """
         View of news page
     """
+    news = News.objects.all()
     return render(request, "news.html", {
         'news_active': True,
+        'news': news,
     })
 
 
