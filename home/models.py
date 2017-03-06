@@ -1,5 +1,6 @@
 from asyncio.test_utils import mock_nonblocking_socket
 from django.db import models
+from django.urls import reverse
 
 # Create your models here.
 
@@ -43,6 +44,12 @@ class Composition(models.Model):
     short_descr = models.CharField(max_length=50)
     detail = models.CharField(max_length=120)
     file = models.FileField(upload_to='media/comps')
+
+    def get_absolute_url(self):
+        """
+        Returns the url to access a particular composition instance.
+        """
+        return reverse('detail', args=[str(self.pk)])
 
 
 class Contact(models.Model):

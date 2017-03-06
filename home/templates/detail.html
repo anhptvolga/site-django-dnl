@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block bodyattrs %}id="pagednl" data-spy="scroll" data-target=".navbar" data-offset="50"{% endblock %}
+{% block bodycontent %}
+<div id="dtcomp" class="container">
+  <h1>{{ comp.name }}</h1>
+  <h6>By Dang Ngoc Long on {{ comp.date|date:"d M, Y" }}</h6>
+  <div class="media">
+    <div class="media-left media-middle">
+        <img class="media-object" src="{{ comp.img.url }}" style="width:300px; height=300px;">
+    </div>
+    <div class="media-body">
+      <p><strong>{{ comp.short_descr }}</strong><p><br/>
+      <p>{{ comp.detail }}</p>
+      <h5><span class="glyphicon glyphicon-usd">{{ comp.price }}</span>
+          <button class="btn" data-toggle="modal" data-target="#buydlg">Buy</button></h4>
+    </div>
+  </div>
+</div>
+{% endblock %}

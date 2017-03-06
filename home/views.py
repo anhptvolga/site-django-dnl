@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Contact, HomePage, Slide, News, Composition
 # Create your views here.
 
@@ -20,10 +20,10 @@ def news(request):
     """
         View of news page
     """
-    news = News.objects.all()
+    ns = News.objects.all()
     return render(request, "news.html", {
         'news_active': True,
-        'news': news,
+        'news': ns,
     })
 
 
@@ -42,11 +42,22 @@ def contact(request):
     """
         View of contact page
     """
-    contact = Contact.objects.all()[1]
+    ct = Contact.objects.all()[1]
     return render(request, "contact.html", {
         'contact_active': True,
-        'address': contact.address,
-        'email': contact.email,
-        'phone': contact.phone
+        'address': ct.address,
+        'email': ct.email,
+        'phone': ct.phone
     })
 
+
+def detail(request, cmp_pk):
+    """
+        View of contact page
+    """
+    print(cmp_pk)
+    cmp = get_object_or_404(Composition, pk=cmp_pk)
+    return render(request, "detail.html", {
+        'comps_active': True,
+        'comp': cmp,
+    })

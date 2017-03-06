@@ -10,7 +10,7 @@
       {% for comp in comps %}
        <div class="col-sm-4">
         <div class="thumbnail">
-          <img src="{{ comp.img.url }}" style="height: 300px">
+            <a href="{{ comp.get_absolute_url }}"><img src="{{ comp.img.url }}" style="height: 300px"></a>
           <p>{{ comp.name }}</p>
           <p><span class="glyphicon glyphicon-usd" style="color: #787c7f"></span>{{ comp.price }}</p>
           <button class="btn" data-toggle="modal" data-target="#buydlg">Buy</button>
