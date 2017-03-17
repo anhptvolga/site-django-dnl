@@ -9,16 +9,54 @@
       {% if comps.count == 2 %}<div class="col-sm-2"></div>{% endif %}
       {% for comp in comps %}
        <div class="col-sm-4">
-        <div class="thumbnail">
-            <a href="{{ comp.get_absolute_url }}"><img src="{{ comp.img.url }}" style="height: 300px"></a>
-          <p>{{ comp.name }}</p>
-          <p><span class="glyphicon glyphicon-usd" style="color: #787c7f"></span>{{ comp.price }}</p>
-          <button class="btn" data-toggle="modal" data-target="#buydlg">Buy</button>
-        </div>
-      </div>
+         <div class="thumbnail">
+             <a href="{{ comp.get_absolute_url }}"><img src="{{ comp.img.url }}" style="height: 300px"></a>
+           <p>{{ comp.name }}</p>
+           <p><span class="glyphicon glyphicon-usd" style="color: #787c7f"></span>{{ comp.price }}</p>
+           <button class="btn" data-toggle="modal" data-target="#buydlg{{ comp.pk }}">Buy</button>
+         </div>
+       </div>
       {% endfor %}
       {% if comps.count == 1 %}<div class="col-sm-4"></div>{% endif %}
       {% if comps.count == 2 %}<div class="col-sm-2"></div>{% endif %}
     </div>
+
+    {% for comp in comps %}
+     <!-- Modal -->
+     <div class="modal fade" id="buydlg{{ comp.pk }}" role="dialog">
+       <div class="modal-dialog">
+         <!-- Modal content-->
+         <div class="modal-content">
+           <div class="modal-header">
+             <button type="button" class="close" data-dismiss="modal">×</button>
+             <h4><span class="glyphicon glyphicon-lock"></span>{{ comp.name }}</h4>
+             <h4><span class="glyphicon glyphicon-usd"></span>{{ comp.price }}</h4>
+           </div>
+           <div class="modal-body">
+             <form role="form">
+               <div class="form-group">
+                 <label for="usrname"><span class="glyphicon glyphicon-user"></span> Send To</label>
+                 <input type="email" class="form-control" id="email" placeholder="Enter email">
+               </div>
+               <div class="form-group">
+                 <label for="usrname"><span class="glyphicon glyphicon-phone"></span> Phone</label>
+                 <input type="tel" class="form-control" id="phonenb" placeholder="Number">
+               </div>
+                 <button type="submit" class="btn btn-block">Pay
+                   <span class="glyphicon glyphicon-ok"></span>
+                 </button>
+             </form>
+           </div>
+           <div class="modal-footer">
+             <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal">
+               <span class="glyphicon glyphicon-remove"></span> Cancel
+             </button>
+           </div>
+         </div>
+       </div>
+     </div>
+    {% endfor %}
+
+
 </div>
 {% endblock %}
