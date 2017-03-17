@@ -12,7 +12,40 @@
       <p><strong>{{ comp.short_descr }}</strong><p><br/>
       <p>{{ comp.detail }}</p>
       <h5><span class="glyphicon glyphicon-usd">{{ comp.price }}</span>
-          <button class="btn" data-toggle="modal" data-target="#buydlg">Buy</button></h4>
+          <button class="btn" data-toggle="modal" data-target="#buydlg{{ comp.pk }}">Buy</button></h5>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="buydlg{{ comp.pk }}" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">×</button>
+            <h4><span class="glyphicon glyphicon-lock"></span>{{ comp.name }}</h4>
+            <h4><span class="glyphicon glyphicon-usd"></span>{{ comp.price }}</h4>
+          </div>
+          <div class="modal-body">
+            <form role="form">
+              <div class="form-group">
+                <label for="usrname"><span class="glyphicon glyphicon-user"></span> Send To</label>
+                <input type="email" class="form-control" id="email" placeholder="Enter email">
+              </div>
+              <div class="form-group">
+                <label for="usrname"><span class="glyphicon glyphicon-phone"></span> Phone</label>
+                <input type="tel" class="form-control" id="phonenb" placeholder="Number">
+              </div>
+                <button type="submit" class="btn btn-block">Pay
+                  <span class="glyphicon glyphicon-ok"></span>
+                </button>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal">
+              <span class="glyphicon glyphicon-remove"></span> Cancel
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
