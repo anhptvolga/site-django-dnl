@@ -4,8 +4,8 @@ from . import models
 # Register your models here.
 
 
-@admin.register(models.HomePage)
-class HomepageAdmin(admin.ModelAdmin):
+@admin.register(models.DnlSiteInfo)
+class DnlSiteInfoAdmin(admin.ModelAdmin):
     list_display = ('biography',)
 
 
@@ -24,6 +24,6 @@ class CompositionAdmin(admin.ModelAdmin):
     list_display = ('date', 'name', 'short_descr')
 
 
-@admin.register(models.Contact)
-class ContactAdmin(admin.ModelAdmin):
-    list_display = ('address', 'phone', 'email')
+@admin.register(models.Feedback)
+class FeedbackAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email')

@@ -5,12 +5,15 @@ from django.urls import reverse
 # Create your models here.
 
 
-class HomePage(models.Model):
+class DnlSiteInfo(models.Model):
     """
         Images and description of home page
     """
     # Fields
     biography = models.TextField()
+    address = models.CharField(max_length=100)
+    phone = models.CharField(max_length=15)
+    email = models.EmailField()
 
 
 class Slide(models.Model):
@@ -20,7 +23,7 @@ class Slide(models.Model):
     img = models.ImageField(upload_to='media/carousel')
     short_descr = models.CharField(max_length=30)
     long_descr = models.CharField(max_length=120)
-    home_page = models.ForeignKey(HomePage, on_delete=models.CASCADE, default=None)
+    home_page = models.ForeignKey(DnlSiteInfo, on_delete=models.CASCADE, default=None)
 
 
 class News(models.Model):
@@ -42,7 +45,7 @@ class Composition(models.Model):
     price = models.PositiveSmallIntegerField(default=0)
     date = models.DateField()
     short_descr = models.CharField(max_length=50)
-    detail = models.CharField(max_length=120)
+    detail = models.TextField()
     file = models.FileField(upload_to='media/comps')
 
     def get_absolute_url(self):
@@ -52,10 +55,10 @@ class Composition(models.Model):
         return reverse('detail', args=[str(self.pk)])
 
 
-class Contact(models.Model):
+class Feedback(models.Model):
     """
-        Information to contact
+        Feedback from user
     """
-    address = models.CharField(max_length=100)
-    phone = models.CharField(max_length=15)
+    name = models.CharField(max_length=100)
     email = models.EmailField()
+    message = models.TextField()

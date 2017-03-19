@@ -1,7 +1,8 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Contact, HomePage, Slide, News, Composition
-# Create your views here.
-
+from .models import DnlSiteInfo, Slide, News, Composition
+from django.views.generic import ListView, DetailView, View
+from django.views.generic.edit import FormMixin, FormView
+from .forms import FeedbackForm
 
 def home(request):
     """
