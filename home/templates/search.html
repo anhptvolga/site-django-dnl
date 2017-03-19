@@ -1,3 +1,25 @@
 {% extends "base.html" %}
-{% block bodyattrs %}{% endblock %}
-{% block bodycontent %}{% endblock %}
+{% block bodyattrs %}id="sres" class="container"{% endblock %}
+{% block bodycontent %}
+
+<h1>Search Results<br>{{ results.count }} found</h1>
+  {% for comp in results %}
+  <div class="media">
+    <div class="media-left media-middle">
+      <a href="{{ comp.get_absolute_url }}">
+        <img class="media-object" src="{{ comp.img.url }}" alt="" width="300" height="300">
+      </a>
+    </div>
+    <div class="media-body">
+      <h3>{{ comp.name }}</h3>
+      <p>{{ comp.detail }}</p>
+      <h5><span class="glyphicon glyphicon-usd">{{ comp.price }}</span>
+          <button class="btn" data-toggle="modal" data-target="#buydlg{{ comp.pk }}">Buy</button></h5>
+    </div>
+  </div>
+  {% endfor %}
+  {% for comp in results %}
+    {% include "buymodal.html" %}
+  {% endfor %}
+
+{% endblock %}
