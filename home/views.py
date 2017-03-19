@@ -6,9 +6,9 @@ from .forms import FeedbackForm
 
 def home(request):
     """
-        View of  page
+        View of page
     """
-    bio = HomePage.objects.first()
+    bio = DnlSiteInfo.objects.first()
     car = Slide.objects.filter(home_page=bio)
     return render(request, "home.html", {
         'home_active': True,
@@ -17,48 +17,62 @@ def home(request):
     })
 
 
-def news(request):
+class NewsView(ListView):
     """
         View of news page
     """
-    ns = News.objects.all()
-    return render(request, "news.html", {
-        'news_active': True,
-        'news': ns,
-    })
+    template_name = "news.html"
+    queryset = News.objects.order_by('-date')
+    context_object_name = 'news'
+
+    def get_context_data(self, **kwargs):
+        context = super(NewsView, self).get_context_data(**kwargs)
+        context['news_active'] = True
+        return context
 
 
-def compositions(request):
+class CompositionsView(ListView):
     """
         View of compositions page
     """
-    comps = Composition.objects.all()[:3]
-    return render(request, "comps.html", {
-        'comps_active': True,
-        'comps': comps,
-    })
+    template_name = 'comps.html'
+    queryset = Composition.objects.all()[:3]
+    context_object_name = 'comps'
+
+    def get_context_data(self, **kwargs):
+        context = super(CompositionsView, self).get_context_data(**kwargs)
+        context['comps_active'] = True
+        return context
 
 
-def contact(request):
+class ContactView(FormMixin, DetailView):
     """
         View of contact page
     """
-    ct = Contact.objects.all()[1]
-    return render(request, "contact.html", {
-        'contact_active': True,
-        'address': ct.address,
-        'email': ct.email,
-        'phone': ct.phone
-    })
+    template_name = 'contact.html'
+    form_class = FeedbackForm
+    context_object_name = 'contact'
+    success_url = '/contact/'
+    slug_field = ''
+
+    def get_context_data(self, **kwargs):
+        context = super(ContactView, self).get_context_data(**kwargs)
+        context['contact_active'] = True
+        return context
+
+    def get_object(self, queryset=None):
+        return DnlSiteInfo.objects.first()
 
 
-def detail(request, cmp_pk):
+class CompDetailView(DetailView):
     """
         View of contact page
     """
-    print(cmp_pk)
-    cmp = get_object_or_404(Composition, pk=cmp_pk)
-    return render(request, "detail.html", {
-        'comps_active': True,
-        'comp': cmp,
-    })
+    template_name = 'detail.html'
+    context_object_name = 'comp'
+    model = Composition
+
+    def get_context_data(self, **kwargs):
+        context = super(CompDetailView, self).get_context_data(**kwargs)
+        context['comps_active'] = True
+        return context

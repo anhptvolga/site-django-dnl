@@ -4,8 +4,8 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.home, name='home'),
-    url(r'^news/$', views.news, name='news'),
-    url(r'^contact/$', views.contact, name='contact'),
-    url(r'^comps/$', views.compositions, name='comps'),
-    url(r'^comps/(?P<cmp_pk>\d+)$', views.detail, name='detail'),
+    url(r'^news/$', views.NewsView.as_view(), name='news'),
+    url(r'^contact/$', views.ContactView.as_view(), name='contact'),
+    url(r'^comps/$', views.CompositionsView.as_view(), name='comps'),
+    url(r'^comp/(?P<pk>\d+)$', views.CompDetailView.as_view(), name='detail'),
 ]
