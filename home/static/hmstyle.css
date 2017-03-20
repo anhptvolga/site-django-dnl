@@ -5,8 +5,11 @@ color: #777;
 
 h1,h6 {
   color: #424242;
-  padding: 10px;
-  border-bottom: 1px solid #bdbdbd;
+}
+
+#news h1, .summary {
+    padding: 12px;
+    border-bottom: 1px solid #bdbdbd;
 }
 
 .media {
