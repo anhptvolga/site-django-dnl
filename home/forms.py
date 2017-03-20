@@ -1,12 +1,14 @@
 from django import forms
+from .models import Feedback
 
-class FeedbackForm(forms.Form):
+
+class FeedbackForm(forms.ModelForm):
     """
         User feedback
     """
-    name = forms.CharField(max_length=100)
-    email = forms.EmailField()
-    message = forms.CharField(widget=forms.Textarea)
+    class Meta:
+        model = Feedback
+        fields = '__all__'
 
 
 class BuyForm(forms.Form):
