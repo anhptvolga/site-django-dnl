@@ -7,26 +7,29 @@
 
   <div class="row">
     <div class="col-md-4">
-      <p><span class="glyphicon glyphicon-map-marker"></span>{{ address }}</p>
-      <p><span class="glyphicon glyphicon-phone"></span>Phone: {{ phone }}</p>
-      <p><span class="glyphicon glyphicon-envelope"></span>Email: {{ email }}</p>
+      <p><span class="glyphicon glyphicon-map-marker"></span> {{ contact.address }}</p>
+      <p><span class="glyphicon glyphicon-phone"></span> Phone: {{ contact.phone }}</p>
+      <p><span class="glyphicon glyphicon-envelope"></span> Email: {{ contact.email }}</p>
     </div>
     <div class="col-md-8">
+    <form role="form" action="" method="post">
       <div class="row">
         <div class="col-sm-6 form-group">
-          <input class="form-control" id="name" name="name" placeholder="Name" type="text" required>
+          <input class="form-control" id="name" name="name" maxlength="100" placeholder="Name" type="text" required>
         </div>
         <div class="col-sm-6 form-group">
           <input class="form-control" id="email" name="email" placeholder="Email" type="email" required>
         </div>
       </div>
-      <textarea class="form-control" id="comments" name="comments" placeholder="Comment" rows="5"></textarea>
+      <textarea class="form-control" id="message" name="message" placeholder="Comment" rows="5" required></textarea>
       <br>
+      {% include 'mess_thanks.html' %}
       <div class="row">
         <div class="col-md-12 form-group">
           <button class="btn pull-right" type="submit">Send</button>
         </div>
       </div>
+    </form>
     </div>
   </div>
   <br>

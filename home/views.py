@@ -3,6 +3,11 @@ from .models import DnlSiteInfo, Slide, News, Composition
 from django.views.generic import ListView, DetailView, View
 from django.views.generic.edit import FormMixin, FormView
 from .forms import FeedbackForm
+from django.contrib import messages
+from django.urls import reverse, reverse_lazy
+
+from django.views.decorators.csrf import csrf_exempt
+
 
 def home(request):
     """
@@ -52,16 +57,39 @@ class ContactView(FormMixin, DetailView):
     template_name = 'contact.html'
     form_class = FeedbackForm
     context_object_name = 'contact'
-    success_url = '/contact/'
+    success_url = 'contact'
     slug_field = ''
 
     def get_context_data(self, **kwargs):
         context = super(ContactView, self).get_context_data(**kwargs)
         context['contact_active'] = True
+        context['form'] = self.get_form()
         return context
 
     def get_object(self, queryset=None):
         return DnlSiteInfo.objects.first()
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        # form = FeedbackForm(data=request.POST)
+        form = self.get_form()
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+    def get_success_url(self):
+        return reverse('contact')
+
+    def form_valid(self, form):
+        # save message
+        mess = form.save()
+        messages.success(self.request, 'Thank you for giving feedback! We got it!')
+        return super(ContactView, self).form_valid(form)
+
+    def form_invalid(self, form):
+        messages.error(self.request, 'Make sure you entered correctly!')
+        return super(ContactView, self).form_valid(form)
 
 
 class CompDetailView(DetailView):
