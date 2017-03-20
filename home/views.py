@@ -76,3 +76,15 @@ class CompDetailView(DetailView):
         context = super(CompDetailView, self).get_context_data(**kwargs)
         context['comps_active'] = True
         return context
+
+
+def search(request):
+    """
+        Search page
+    """
+    searching = request.GET['search'] if 'search' in request.GET else ''
+    results = Composition.objects.filter(name__contains=request.GET['search'])
+    return render(request, "search.html", {
+        'results': results,
+        'searching': searching,
+    })

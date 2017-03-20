@@ -2,7 +2,16 @@
 {% block bodyattrs %}id="sres" class="container"{% endblock %}
 {% block bodycontent %}
 
-<h1>Search Results<br>{{ results.count }} found</h1>
+<h1>Search Results</h1>
+    <h5 class="summary">
+        {% if results|length == 0 %}
+            Nothing
+        {% else %}
+            <code>{{ results|length }}</code>
+            {% if results|length == 1 %}result{% else %}results{% endif %}
+        {% endif %}
+        were found for the search for <code>{{ searching }}</code></h5>
+    </br>
   {% for comp in results %}
   <div class="media">
     <div class="media-left media-middle">

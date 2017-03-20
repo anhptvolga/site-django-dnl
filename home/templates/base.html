@@ -26,9 +26,9 @@
         <li {%  if comps_active %}class="active"{% endif %}><a href="{% url 'comps' %}">COMPOSITIONS</a></li>
         <li {%  if contact_active %}class="active"{% endif %}><a href="{% url 'contact' %}">CONTACT</a></li>
         <li>
-            <form action="" class="search-form">
+            <form action="{% url 'search' %}" class="search-form" method="get">
                 <div class="form-group has-feedback">
-                    <input type="text" class="form-control" name="search" id="search" placeholder="search">
+                    <input type="text" class="form-control" name="search" id="search" placeholder="search" required>
                     <span class="glyphicon glyphicon-search form-control-feedback"></span>
                 </div>
             </form>
