@@ -1,3 +1,9 @@
 {% extends "base.html" %}
-{% block bodyattrs %}{% endblock %}
-{% block bodycontent %}{% endblock %}
+{% block bodyattrs %}id="pagednl" data-spy="scroll" data-target=".navbar" data-offset="50"{% endblock %}
+{% block bodycontent %}
+<div id="e404" class="container text-center">
+  <h3>Error 404. Opps you're have encountered an error</h3>
+  <p>It apperrs that either something went wrong or the page doesn't exist anymore.</p>
+  <p>If you have any questions, please contact our Technical Support department.</p>
+</div>
+{% endblock %}

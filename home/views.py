@@ -116,3 +116,7 @@ def search(request):
         'results': results,
         'searching': searching,
     })
+
+
+def e404(request):
+    return render(request, '404.html')
