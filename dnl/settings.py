@@ -26,7 +26,7 @@ SECRET_KEY = 's4ra3($whxy8$yzy6nm5_8e8^e4@$=9*q-qnw)_hqnxqrz-4)q'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost']
 
 
 # Application definition
@@ -142,3 +142,12 @@ MESSAGE_TAGS = {
     messages.WARNING: 'alert-warning',
     messages.ERROR: 'alert-danger',
 }
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.mail.ru'
+EMAIL_PORT = 2525 # mail.ru
+EMAIL_HOST_USER = "anhptvolga@mail.ru"
+EMAIL_HOST_PASSWORD = "forWebDnl17"
+
+SERVER_EMAIL = EMAIL_HOST_USER
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

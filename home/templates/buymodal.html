@@ -9,14 +9,14 @@
          <h4><span class="glyphicon glyphicon-usd"></span>{{ comp.price }}</h4>
        </div>
        <div class="modal-body">
-         <form role="form" method="post">
+         <form role="form" action="{{ comp.get_absolute_url }}/pay" method="post">
            <div class="form-group">
              <label for="usrname"><span class="glyphicon glyphicon-user"></span> Send To</label>
-             <input type="email" class="form-control" id="email" placeholder="Enter email" required>
+             <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" required>
            </div>
            <div class="form-group">
              <label for="usrname"><span class="glyphicon glyphicon-phone"></span> Phone</label>
-             <input type="tel" class="form-control" id="phonenb" placeholder="Number" required>
+             <input type="tel" pattern="^([(+7)8])?(\d{3})[-\.]?(\d{3})[-\.]?(\d{2})[-\.]?(\d{2})$" class="form-control" id="phone" name="phone" placeholder="Number" required>
            </div>
              <button type="submit" class="btn btn-block">Pay
                <span class="glyphicon glyphicon-ok"></span>

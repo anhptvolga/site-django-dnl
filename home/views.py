@@ -1,12 +1,14 @@
 from django.shortcuts import render, get_object_or_404
 from .models import DnlSiteInfo, Slide, News, Composition
 from django.views.generic import ListView, DetailView, View
-from django.views.generic.edit import FormMixin, FormView
-from .forms import FeedbackForm
+from django.views.generic.edit import FormMixin, FormView, SingleObjectMixin
+from .forms import FeedbackForm, BuyForm
 from django.contrib import messages
 from django.urls import reverse, reverse_lazy
-
+from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
+from dnl.settings import EMAIL_HOST_USER
+from django.core.mail import send_mail, EmailMessage
 
 
 def home(request):
@@ -57,7 +59,6 @@ class ContactView(FormMixin, DetailView):
     template_name = 'contact.html'
     form_class = FeedbackForm
     context_object_name = 'contact'
-    success_url = 'contact'
     slug_field = ''
 
     def get_context_data(self, **kwargs):
@@ -92,7 +93,33 @@ class ContactView(FormMixin, DetailView):
         return super(ContactView, self).form_valid(form)
 
 
-class CompDetailView(DetailView):
+class CompositionPay(FormMixin):
+    form_class = BuyForm
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.get_form()
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+    def form_valid(self, form):
+        # TODO: seding mail here
+        email_address = form.cleaned_data['email']
+        email_message = EmailMessage('Sheet from DNL site', 'Thank you!', EMAIL_HOST_USER, [email_address])
+        email_message.attach_file(self.object.file.path)
+        email_message.send()
+
+        messages.success(self.request, 'Thank you for paying! We send sheet for you!')
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        messages.error(self.request, 'Make sure you entered correctly!')
+        return super().form_invalid(form)
+
+
+class CompositionDetail(CompositionPay, DetailView):
     """
         View of contact page
     """
@@ -100,8 +127,12 @@ class CompDetailView(DetailView):
     context_object_name = 'comp'
     model = Composition
 
+    def get_success_url(self):
+        return self.object.get_absolute_url()
+
     def get_context_data(self, **kwargs):
-        context = super(CompDetailView, self).get_context_data(**kwargs)
+        object = self.get_object()
+        context = super(CompositionDetail, self).get_context_data(**kwargs)
         context['comps_active'] = True
         return context
 
